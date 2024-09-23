@@ -1,0 +1,270 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.FullViewPort{
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    
+}
+.navigationBar{
+    width: 100%;
+    position: fixed;
+    height: 60px; 
+    top: 0;
+    z-index: 1000;
+}
+.contentViewport{
+    height: max-content;
+    width: 100vw;
+    flex-grow: 1;
+    margin-top: 12vh;
+    margin-bottom: 2vh;
+}
+.loginForm {
+    background-color: #0e3a61;
+}
+.registerForm{
+    width: 35%;
+}
+.addBookForm{
+    width: 50%;
+    padding: 10px;
+    height: max-content;
+}
+.updateBookForm{
+    width : 50%;
+    height: max-content;
+    overflow-x: hidden;
+}
+.findBookForm{
+    background-color: #101d29;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+.deleteBookForm{
+    background-color: #101d29;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+.bookDeatilsToDelete{
+    width: 50%;
+    background-color: #101d29;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+.bookDeatilsToDelete td{
+    padding: 10px;
+}
+.bookDeatilsToDelete tr{
+    border: 1px solid rebeccapurple;
+    
+}
+.categoriesBox{
+    width: 200px;
+    height: 200px;
+    color : white;
+    background-color: rgb(20, 80, 80);
+}
+.categoriesBox:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px 10px rgb(34, 33, 31);
+}
+.cards{
+    width: 300px;
+    height: 600px;
+}
+.BookHeader p{
+    font-size: larger;
+}
+.BookHeader h1{
+    font-size: 60px;
+}
+.descriptionBox p{
+    font-size: large;
+}
+.Image{
+    width: 500px;
+}
+.AddDescriptionBox{
+    width: 90%;
+}
+.userIconContainer{
+    width: max-content;
+}
+.UserDetailsTable{
+    background-color: #2a333b;
+    color: white;
+    padding: 50px;
+    border-radius: 10px;
+    height: max-content;
+}
+.UserDetailsTable td{
+    padding: 20px;
+}
+.IdUpdateCard{
+    background-color: #101d29;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+.updatePWForm{
+    background-color: #101d29;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+@media only screen and (max-width : 1300px){
+    .registerForm{
+        width: 70%;
+
+    }
+    .addBookForm{
+        width: 80%;
+        
+    }
+    .bookDeatilsToDelete{
+        width: 70%;
+    }
+    .BookHeader p{
+        font-size: larger;
+    }
+    .BookHeader h1{
+        font-size: 50px;
+    }
+    .descriptionBox p{
+        font-size: large;
+    }
+    .descriptionBox h1{
+        font-size: large;
+    }
+    .Image{
+        width: 300px;
+    }
+}
+@media only screen and (max-width : 990px){
+    .registerForm{
+        width: 75%;
+    }
+    .addBookForm{
+        width: 70%;
+        height: max-content;
+    }
+    .updateBookForm{
+        width: 80%;
+    }
+    .bookDeatilsToDelete{
+        width: 80%;
+    }
+    .BookHeader p{
+        font-size: large;
+    }
+    .BookHeader h1{
+        font-size: 30px;
+    }
+    .Image{
+        width: 300px;
+    }
+}
+
+
+/* mobile */
+@media only screen and (max-width: 768px){
+    .registerForm{
+        width: 80%;
+    }
+    .addBookForm{
+        width: 90%;
+    }
+    .updateBookContainer{
+        width: 90vw;
+        margin: auto;
+    }
+    .findBookForm{
+        width: 70%;
+        align-self: center;
+    }
+    .updateBookForm{
+        width: 100%;
+    }
+    .bookDeatilsToDelete{
+        width: 90%;
+    }
+    .Image{
+        width: 200px;
+    }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.vh-92{
+    height: 92vh;
+}
+.w-30{
+    width: 30%;
+}
+
+/* Hide the spinners in number inputs */
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* *::-webkit-scrollbar{
+    visibility:  hidden;
+} */
+.w-5{
+    width: 5%;
+}
+.w-30{
+    width: 30%;
+}
+.vh-92{
+    max-height: 92vh;
+}
+.vh-91{
+    max-height: 91vh;
+}
+.fullViewport::-webkit-scrollbar{
+    /* width: 0; */
+    visibility: hidden;
+}
+.w-90{
+    max-width: 90%;
+}
+.w-40{
+    width: 40%;
+}
+.w-60{
+    width: 60%;
+}
+.w-20{
+    width: 20%;
+}
+.w-35{
+    width: 35%;
+}
+
+.registerForm{
+    background-color: rgb(36, 36, 88);
+}
+.h-20{
+    height: 20%;
+}
+.bg-lightBlue{
+    background-color: #101d29;
+}
