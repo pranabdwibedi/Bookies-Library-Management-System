@@ -57,7 +57,7 @@ A full-stack MERN project that manages books in a library, providing two types o
 ### Backend
 1. Clone the repository and navigate to the backend folder:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/pranabdwibedi/Library-Management-System.git
    cd Library-Management-System/backend
    ```
 2. Install dependencies:
