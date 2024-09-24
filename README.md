@@ -65,17 +65,16 @@ A full-stack MERN project that manages books in a library, providing two types o
    npm install
    ```
 3. Set up environment variables by creating `auth.config.js, db.config.js, server.config.js` in a `configs` folder in the `backend` directory:
-
-**In `auth.config.js` :
+In `auth.config.js` :
    ```
    SECRET = <Your secret for jwt token>
    ADMIN_SECRET = <Secret code for admin creation>
    ```
-**In `db.config.js` :
+In `db.config.js` :
 ```
 URI = <your_mongodb_connection_string>
 ```
-**In `server.config.js` :
+In `server.config.js` :
    ```
    PORT=<your_port>  
    ```
