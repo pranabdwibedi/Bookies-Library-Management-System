@@ -38,7 +38,7 @@ function AddBook({ isLogin, isAdmin, setIsLogin }) {
   setIsLogin(ValidateToken)
   if (!isLogin) {
     return (
-      <div className="vh-92 d-flex flex-column justify-content-center align-items-center">
+      <div className="vh-100 d-flex flex-column justify-content-center align-items-center">
         <h1 className="text-center">
           You are not Logged in!
           <br />
@@ -52,7 +52,7 @@ function AddBook({ isLogin, isAdmin, setIsLogin }) {
   }
   if (!isAdmin) {
     return (
-      <div className="vh-92 d-flex flex-column justify-content-center align-items-center">
+      <div className="vh-100 d-flex flex-column justify-content-center align-items-center">
         <h1>You have no rights to access this page !</h1>
         <NavLink to="/">
           <button className="btn btn-success">Home</button>
@@ -119,7 +119,7 @@ function AddBook({ isLogin, isAdmin, setIsLogin }) {
   };
 
   return (
-    <div className="contentViewport d-flex flex-column gap-4 justify-content-center align-items-center">
+    <div className="contentViewport pt-5 d-flex flex-column gap-4 justify-content-center align-items-center">
       <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
       <h1>
         <u>Add new Book</u>

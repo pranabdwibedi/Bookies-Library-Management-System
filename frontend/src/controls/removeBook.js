@@ -80,7 +80,7 @@ function RemoveBook({ isLogin, isAdmin, setIsLogin }) {
   }
 
   return (
-    <div className="contentViewport">
+    <div className="contentViewport pt-5">
       <div className="d-flex justify-content-center align-items-center flex-column">
         <h1>
           <u>Delete a Book from the Database</u>

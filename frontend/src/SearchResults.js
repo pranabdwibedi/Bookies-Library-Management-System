@@ -4,7 +4,7 @@ import BookCard from './components/BookCard'
 function SearchResult({heading,array,isLogin,setIsLogin,isAdmin,setIsAdmin}) {
   setIsLogin(ValidateToken)
   return (
-    <div className='contentViewport'>
+    <div className='contentViewport pt-5'>
       {/* <Table heading={heading} books={array}/> */}
       <BookCard heading={heading} books={array} isLogin={isLogin} setIsLogin={setIsLogin} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
     </div>

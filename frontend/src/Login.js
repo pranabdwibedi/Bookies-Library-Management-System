@@ -46,7 +46,7 @@ const Login = ({ isLogin, setIsLogin, isAdmin, setIsAdmin }) => {
   }
 
   return (
-    <div className="vw-100 vh-92 d-flex justify-content-center align-items-center">
+    <div className="contentViewport d-flex justify-content-center align-items-center loginPage">
       <div className="loginForm p-5 rounded text-light">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">

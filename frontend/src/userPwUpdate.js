@@ -62,7 +62,7 @@ export default function UserPwUpdate() {
         })
     }
   return (
-    <div className="contentViewport d-flex justify-content-center align-items-center">
+    <div className="contentViewport pt-5 d-flex justify-content-center align-items-center">
       <div className="d-flex flex-column gap-3">
         <h1>
           <u>Password Update</u>

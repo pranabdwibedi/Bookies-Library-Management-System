@@ -45,12 +45,11 @@ function Navbar({
     navigate('/login')
   };
   return (
-    <div className="navigationBar">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg navigationBar">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
             <img src="/logo.png" alt="" height={30} className="m-2" />
-            Bookies
+            <span>Bookies</span>
           </NavLink>
           <button
             className="navbar-toggler"
@@ -67,24 +66,24 @@ function Navbar({
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to="/">
-                  Home
+                <span>Home</span>
                 </NavLink>
               </li>
               <li className={`nav-item ${isLogin ? "" : "visually-hidden"}`}>
                 <NavLink className="nav-link" to="/books/all">
-                  All books
+                <span>All books</span>
                 </NavLink>
               </li>
               <li className={`nav-item ${isLogin ? "" : "visually-hidden"}`}>
                 <NavLink className="nav-link" to="/books/categories">
-                  Categories
+                  <span>Categories</span>
                 </NavLink>
               </li>
               <li className={`nav-item dropdown ${isLogin && isAdmin ? "" : "visually-hidden"}`}>
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+                Admin Controls
               </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu dropMenu" aria-labelledby="navbarDropdown">
                 <li>
                   <NavLink className="dropdown-item" to="/books/controls/add">
                     Add New Book
@@ -153,7 +152,6 @@ function Navbar({
           </div>
         </div>
       </nav>
-    </div>
   );
 }
 

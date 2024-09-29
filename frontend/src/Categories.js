@@ -7,7 +7,7 @@ function Categories({isLogin,setIsLogin, categories}) {
   setIsLogin(ValidateToken)
   if(!isLogin){
     return (
-        <div className='vh-92 d-flex flex-column justify-content-center align-items-center'>
+        <div className='vh-100 d-flex flex-column justify-content-center align-items-center'>
             <h1 className='text-center'>You are not Logged in!<br/>Please Login</h1>
             <NavLink to='/login'>
             <button className='btn btn-success'>Login</button>
@@ -19,7 +19,7 @@ function Categories({isLogin,setIsLogin, categories}) {
     navigator(`/books/${category.toLowerCase()}`);
   };
   return (
-    <div className="contentViewport d-flex flex-column">
+    <div className="contentViewport d-flex flex-column pt-5">
       <div>
       <h3 className="m-4">Choose your favorite category : </h3>
       <div className="d-flex flex-wrap p-5 gap-2 justify-content-between">

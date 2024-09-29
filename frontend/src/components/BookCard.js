@@ -6,21 +6,21 @@ function BookCard({ books, heading, isAdmin }) {
   return (
     <div className="contentViewport">
         <h1>{heading}</h1>
-      <div className="p-5 d-flex flex-wrap gap-5 justify-content-between align-items-center">
+      <div className="p-5 d-flex flex-wrap gap-2 justify-content-center align-items-center">
         {books.map((book, index) => {
           return (
-            <div className="card cards p-2" key={index}>
+            <div className="card cards px-2 pt-2" key={index}>
               <img
                 src="/bookLogo.png"
                 alt="book Image"
                 className="card-image-top"
               />
-              <div className="card-body d-flex flex-column">
+              <div className="card-body d-flex flex-column gap-2">
                 <h5 class="card-title">{book.name.substring(0,45)}{(book.name.length < 45)?"":"..."}</h5>
-                <p className={`${isAdmin ? "" : "visually-hidden"}`}>
+                <span className={`${isAdmin ? "" : "visually-hidden"}`}>
                   Book ID : {book.bookId}
-                </p>
-                <p>
+                </span>
+                <span>
                   Written by : {" "}
                   {book.author.map((author) => {
                     if (book.author[book.author.length - 1] === author) {
@@ -28,10 +28,10 @@ function BookCard({ books, heading, isAdmin }) {
                     }
                     return author + ", ";
                   })}
-                </p>
-                <p>Published Year : {book.publishYear}</p>
-                <p>Language : {book.language}</p>
-                <p>
+                </span>
+                <span>Published Year : {book.publishYear}</span>
+                <span>Language : {book.language}</span>
+                <span>
                   <b>
                     Available :{" "}
                     <span
@@ -42,7 +42,7 @@ function BookCard({ books, heading, isAdmin }) {
                       {book.availableQty !== 0 ? "Yes" : "No"}
                     </span>
                   </b>
-                </p>
+                </span>
                 <button onClick={()=>{
                     navigate(`/books/book/${book.name}`)
                 }} class="btn btn-primary">View Details</button>

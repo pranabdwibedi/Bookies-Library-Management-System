@@ -174,7 +174,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
   };
 
   return (
-    <div className="contentViewport">
+    <div className="contentViewport pt-5">
       <div className="d-flex updateBookContainer flex-column gap-2 justify-content-center align-items-center">
         <h1>
           <u>Update details of a book</u>

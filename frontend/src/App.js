@@ -31,42 +31,42 @@ function App() {
   const [keyword,setKeyword] = useState();
   const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
-    const fetchAllBooks = async () => {
-      await axios
-        .get("http://localhost:8000/LMS/api/v1/books/bookInfo", {
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        })
-        .then((response) => {
-          const sortedBooks = response.data.sort((a, b) => {
-            if (a.bookId < b.bookId) return -1; // a comes before b
-            if (a.bookId > b.bookId) return 1; // a comes after b
-            return 0;
-          });
-          setAllBooks(sortedBooks);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const fetchCategories = async () => {
-      await axios
-        .get("http://localhost:8000/LMS/api/v1/books/categories", {
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        })
-        .then((response) => {
-          setCategories(response.data);
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-        });
-    };
     fetchAllBooks();
     fetchCategories();
   }, []);
+  const fetchAllBooks = async () => {
+    await axios
+      .get("http://localhost:8000/LMS/api/v1/books/bookInfo", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        const sortedBooks = response.data.sort((a, b) => {
+          if (a.bookId < b.bookId) return -1; // a comes before b
+          if (a.bookId > b.bookId) return 1; // a comes after b
+          return 0;
+        });
+        setAllBooks(sortedBooks);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const fetchCategories = async () => {
+    await axios
+      .get("http://localhost:8000/LMS/api/v1/books/categories", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  };
   return (
     <div className="FullViewPort">
       
@@ -174,6 +174,8 @@ function App() {
                   <GetBookByType
                     bookType={category}
                     isLogin={isLogin}
+                    isAdmin={isAdmin}
+                    setIsAdmin={setIsAdmin}
                     setIsLogin={setIsLogin}
                     allBooks = {allBooks}
                   />

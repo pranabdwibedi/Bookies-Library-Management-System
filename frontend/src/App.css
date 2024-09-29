@@ -15,20 +15,45 @@
 }
 .navigationBar{
     width: 100%;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
     position: fixed;
     height: 60px; 
     top: 0;
     z-index: 1000;
 }
+.navigationBar span, .navigationBar a{
+    color: white;
+}
+.dropMenu{
+    background-color: rgb(58, 54, 47);
+}
 .contentViewport{
-    height: max-content;
+    height: 100vh;
     width: 100vw;
     flex-grow: 1;
-    margin-top: 12vh;
-    margin-bottom: 2vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: white;
+    background-image: url('D:/Desktop/Library Management System/frontend/public/Ubackground.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 10px;
 }
-.loginForm {
-    background-color: #0e3a61;
+.loginForm,.registerForm {
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+}
+.homePage{
+    background-image: url("D:/Desktop/Library Management System/frontend/public/homeBg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.userInfoPanel{
+    padding-top: 6rem;
+    padding-bottom: 20px;
 }
 .registerForm{
     width: 35%;
@@ -81,7 +106,9 @@
 }
 .cards{
     width: 300px;
-    height: 600px;
+    height: 550px;
+    background-color: #101d29;
+    color: white;
 }
 .BookHeader p{
     font-size: larger;
@@ -104,9 +131,8 @@
 .UserDetailsTable{
     background-color: #2a333b;
     color: white;
-    padding: 50px;
+    padding: 20px;
     border-radius: 10px;
-    height: max-content;
 }
 .UserDetailsTable td{
     padding: 20px;
@@ -239,7 +265,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .vh-91{
     max-height: 91vh;
 }
-.fullViewport::-webkit-scrollbar{
+::-webkit-scrollbar{
     /* width: 0; */
     visibility: hidden;
 }
@@ -257,10 +283,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .w-35{
     width: 35%;
-}
-
-.registerForm{
-    background-color: rgb(36, 36, 88);
 }
 .h-20{
     height: 20%;

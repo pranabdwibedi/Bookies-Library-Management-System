@@ -5,11 +5,10 @@ import { NavLink } from "react-router-dom";
 import ValidateToken from "./utils/ValidateToken";
 import BookCard from "./components/BookCard";
 export default function AllBook({ isLogin, setIsLogin, isAdmin, setIsAdmin, books }) {
-  const [allBooks, setAllBooks] = useState([]);
   setIsLogin(ValidateToken)
   if (!isLogin) {
     return (
-      <div className="vh-92 d-flex flex-column justify-content-center align-items-center">
+      <div className="vh-100 d-flex flex-column justify-content-center align-items-center">
         <h1 className="text-center">
           You are not Logged in!
           <br />
@@ -22,7 +21,7 @@ export default function AllBook({ isLogin, setIsLogin, isAdmin, setIsAdmin, book
     );
   }
   return (
-  <div className="contentViewport">
+  <div className="contentViewport pt-5">
     {/* <Table heading={"All Books :"} books={allBooks} />; */}
     <BookCard heading={"All Books : "} books={books} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
   </div>

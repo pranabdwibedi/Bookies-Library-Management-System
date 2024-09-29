@@ -81,7 +81,7 @@ export default function UserIdUpdate({isLogin, setIsLogin, isAdmin, setIsAdmin})
         }
     }
   return (
-    <div className='contentViewport d-flex align-items-center justify-content-center'>
+    <div className='contentViewport pt-5 d-flex align-items-center justify-content-center'>
       <div className='d-flex flex-column align-items-center gap-4'>
         <h1><u>User ID update</u></h1>
       <div className='IdUpdateCard'>

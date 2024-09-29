@@ -40,7 +40,7 @@ function Register() {
     }
   };
   return (
-    <div className="contentViewport d-flex">
+    <div className="contentViewport d-flex registerPage">
       <form onSubmit={handleSubmit} className="registerForm m-auto text-light d-flex flex-wrap flex-column rounded-4 p-4">
         <div className="d-flex flex-wrap gap-3 justify-content-center">
         <div className="mb-3">

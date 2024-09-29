@@ -39,8 +39,8 @@ function UserInfoPanel({ isLogin, isAdmin, setIsAdmin, setIsLogin}) {
     navigate('/login')
   };
   return (
-    <div className="contentViewport d-flex justify-content-center align-items-center">
-      <div className="w-50 d-flex flex-column align-items-center gap-3">
+    <div className="contentViewport userInfoPanel d-flex justify-content-center align-items-center">
+      <div className="w-75 d-flex flex-column align-items-center gap-2">
         <h1><u>Hello, {sortName(localStorage.getItem("name"))}</u></h1>
         <div className="w-100 UserDetailsTable">
           <div className="w-100 d-flex flex-row-reverse">
@@ -91,7 +91,7 @@ function UserInfoPanel({ isLogin, isAdmin, setIsAdmin, setIsLogin}) {
                 <td colSpan={2}>
                   <button
                     type="button"
-                    className={`btn btn-primary ms-5 ${
+                    className={`btn btn-primary${
                       isLogin ? "" : "visually-hidden"
                     }`}
                     onClick={handleLogout}

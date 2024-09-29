@@ -53,7 +53,7 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
     }
   }
   return (
-    <div className="contentViewport d-flex justify-content-center align-items-center">
+    <div className="contentViewport pt-5 d-flex justify-content-center align-items-center">
       <div className="d-flex updateBookContainer flex-column gap-2 justify-content-center align-items-center">
         <h1>
           <u>Update user details</u>
