@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function BookCard({ books, heading, isAdmin }) {
     const navigate = useNavigate()
   return (
     <div className="contentViewport">
         <h1>{heading}</h1>
-      <div className="p-5 d-flex flex-wrap gap-2 justify-content-center align-items-center">
+      <div className="p-5 d-flex flex-wrap gap-5 justify-content-center align-items-center">
         {books.map((book, index) => {
           return (
             <div className="card cards px-2 pt-2" key={index}>
@@ -15,7 +14,7 @@ function BookCard({ books, heading, isAdmin }) {
                 alt="book Image"
                 className="card-image-top"
               />
-              <div className="card-body d-flex flex-column gap-2">
+              <div className="card-body d-flex flex-column justify-content-around gap-2">
                 <h5 class="card-title">{book.name.substring(0,45)}{(book.name.length < 45)?"":"..."}</h5>
                 <span className={`${isAdmin ? "" : "visually-hidden"}`}>
                   Book ID : {book.bookId}
@@ -43,6 +42,7 @@ function BookCard({ books, heading, isAdmin }) {
                     </span>
                   </b>
                 </span>
+                <span>Price : <b>₹{book.price}/- </b>per day</span>
                 <button onClick={()=>{
                     navigate(`/books/book/${book.name}`)
                 }} class="btn btn-primary">View Details</button>

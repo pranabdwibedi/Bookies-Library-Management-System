@@ -46,13 +46,17 @@ export default function UserPwUpdate() {
             password : password,
             newPassword : newPassword1
         }
-        await axios.post('http://localhost:8000/LMS/api/v1/user/updatePW',data,{
+        await axios.put('http://localhost:8000/LMS/api/v1/user/updatePW',data,{
             headers : {
                 'x-access-token' : localStorage.getItem('token')
             }
         }).then(response=>{
             setUpdateMessage("Password updated successfully")
             localStorage.setItem('token','')
+            setTimeout(()=>{
+              setUpdateMessage("")
+              window.location.reload();
+            },500)
             navigate('/login')
         }).catch(err=>{
             setUpdateMessage(err.response.data.message)
@@ -71,12 +75,13 @@ export default function UserPwUpdate() {
         <form onSubmit={verifyPassword} className="d-flex flex-column align-items-center gap-2">
           <div class="mb-3">
             <label for="existingPassword" class="form-label">
-              Enter your existing Password
+              Existing Password
             </label>
             <input
               type="password"
-              class="form-control"
+              class="form-control inputField text-white bg-transparent"
               id="existingPassword"
+              placeholder="Enter existing password"
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
             />
@@ -87,23 +92,25 @@ export default function UserPwUpdate() {
         <form onSubmit={updatePassword} className={`d-flex flex-column align-items-center gap-2 ${isValid?"":"visually-hidden"}`}>
           <div class="mb-3">
             <label for="newPassword" class="form-label">
-              Enter your new Password
+              New Password
             </label>
             <input
               type="password"
-              class="form-control"
+              class="form-control inputField text-white bg-transparent"
               id="newPassword"
+              placeholder="Enter Your new Password"
               value={newPassword1}
               onChange={(e)=>setNewPassword1(e.target.value)}
             />
           </div>
           <div class="mb-3">
             <label for="reenterNewPassword" class="form-label">
-              Re-enter your new Password
+              Re-enter Password
             </label>
             <input
               type="password"
-              class="form-control"
+              class="form-control inputField text-white bg-transparent"
+              placeholder="Reenter your new password"
               id="reenterNewPassword"
               value={newPassword2}
               onChange={(e)=>{setNewPassword2(e.target.value)}}

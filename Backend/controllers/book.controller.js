@@ -14,9 +14,6 @@ const addBookController = async (req, res) => {
         break;
       }
     }
-    // if(!bookId){
-    //     bookId = noOfBooks+1
-    // }
     for (let i = 1; i <= noOfBooks; i++) {
       let book = await bookModel.findOne({ bookId: i });
       if (!book) {
@@ -30,7 +27,8 @@ const addBookController = async (req, res) => {
       bookId: bookId,
       language: requestBody.language,
       bookType: requestBody.bookType,
-      bookDesc : requestBody.bookDesc
+      bookDesc : requestBody.bookDesc,
+      price : requestBody.price
     };
     if (requestBody.edition) {
       newBook.edition = requestBody.edition;
@@ -56,13 +54,13 @@ const addBookController = async (req, res) => {
 
 //controller to remove a book from database
 const removeBookController = async (req, res) => {
-  const requestBody = req.body;
+  const bookId = req.query.bookId;
   try {
     const deletedBook = await bookModel.deleteOne({
-      bookId: requestBody.bookId,
+      bookId: bookId,
     });
     deletedBook.message = "Book deleted Successfully";
-    return res.status(200).send(deletedBook);
+    return res.status(204).send(deletedBook);
   } catch (err) {
     console.log(err);
     return res.status(500).send({
@@ -86,6 +84,12 @@ const updateBookController = async (req, res) => {
       await bookModel.updateOne(
         {bookId : requestBody.bookId},
         {bookDesc : requestBody.bookDesc}
+      );
+    }
+    if(requestBody.price){
+      await bookModel.updateOne(
+        {bookId : requestBody.bookId},
+        {price : requestBody.price}
       );
     }
     if (requestBody.author) {
@@ -140,14 +144,19 @@ const updateBookController = async (req, res) => {
     });
   }
 };
-
-const readBookInfoController = async (req, res) => {
-  if (req.query.bookId) {
-    const bookInfo = await bookModel.findOne({ bookId: req.query.bookId });
-    return res.status(200).send(bookInfo);
-  } else {
+const readAllBookInfoController = async (req,res) =>{
     const books = await bookModel.find();
     return res.status(200).send(books);
+}
+
+const readBookInfoController = async (req, res) => {
+  try{
+    const bookInfo = await bookModel.findOne({ bookId: req.query.bookId });
+    return res.status(200).send(bookInfo);
+  }catch(err){
+    return res.status(500).send({
+      message : "Internal error occured"
+    })
   }
 };
 const getAllBookCategories = async (req, res) => {
@@ -208,6 +217,7 @@ export {
   removeBookController,
   updateBookController,
   readBookInfoController,
+  readAllBookInfoController,
   getBookCategories,
   getBookByType,
   getBookByName,

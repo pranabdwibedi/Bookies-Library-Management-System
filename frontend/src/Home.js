@@ -22,7 +22,7 @@ export default function Home({ isLogin, setIsLogin, isAdmin, setIsAdmin }) {
   return (
     <div className="contentViewport pt-5 d-flex align-items-center justify-content-center homePage">
         <div className="col-md-8 text-center">
-          <div className="card shadow-sm">
+          <div className="card shadow-sm homeGreetCard">
             <div className="card-body">
               <h1 className="display-4">
                 Welcome, <b>{localStorage.getItem('name')}</b>!

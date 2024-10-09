@@ -40,7 +40,7 @@ function UserInfoPanel({ isLogin, isAdmin, setIsAdmin, setIsLogin}) {
   };
   return (
     <div className="contentViewport userInfoPanel d-flex justify-content-center align-items-center">
-      <div className="w-75 d-flex flex-column align-items-center gap-2">
+      <div className="w-75 d-flex flex-column align-items-center gap-2 pt-5">
         <h1><u>Hello, {sortName(localStorage.getItem("name"))}</u></h1>
         <div className="w-100 UserDetailsTable">
           <div className="w-100 d-flex flex-row-reverse">

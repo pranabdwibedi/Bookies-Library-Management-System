@@ -39,12 +39,15 @@ const bookSchema = new mongoose.Schema({
     },
     totalQty : {
         type : Number,
-        required : true,
-        default : 0
+        required : true
     },
     availableQty : {
         type : Number,
         default : 0,
+    },
+    price : {
+        type : Number,
+        default : 0
     }
 },{versionKey:false,timestamps:true})
 

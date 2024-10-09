@@ -48,6 +48,7 @@ function RemoveBook({ isLogin, isAdmin, setIsLogin }) {
         .then((response) => {
           setBook(response.data);
           setIsValid(true);
+          setMessage('')
         })
         .catch((err) => {
           setMessage(err.response.data.message);
@@ -60,17 +61,17 @@ function RemoveBook({ isLogin, isAdmin, setIsLogin }) {
 
 
   const deleteBook = async() =>{
-    const data = {
-        bookId: bookId,
-      };
     try{
-        await axios.post('http://localhost:8000/LMS/api/v1/books/remove',data,{
+        await axios.delete(`http://localhost:8000/LMS/api/v1/books/remove?bookId=${bookId}`,{
             headers : {
                 "x-access-token" : localStorage.getItem('token')
             }
         }).then(response=>{
             setMessage(response.data.message)
-
+            setTimeout(()=>{
+              setMessage('')
+              window.location.reload();
+            },500)
         }).catch(err=>{
             setMessage(err.response.data.message)
         })
@@ -83,26 +84,29 @@ function RemoveBook({ isLogin, isAdmin, setIsLogin }) {
     <div className="contentViewport pt-5">
       <div className="d-flex justify-content-center align-items-center flex-column">
         <h1>
-          <u>Delete a Book from the Database</u>
+          <u>Delete a Book</u>
         </h1>
         <form
           onSubmit={findBook}
           className="d-flex flex-column gap-3 justify-content-center align-items-center deleteBookForm"
         >
           <div className="d-flex gap-3 justify-content-center">
-            <label htmlFor="bookIdInput">Enter book ID : </label>
+            <label htmlFor="bookIdInput" className="align-self-center">Book ID : </label>
             <input
-              className="form-control w-25"
+              className="form-control w-50 inputField text-white bg-transparent"
               id="bookIdInput"
               aria-describedby="bookIdInput"
               type="number"
+              placeholder="Enter Book ID"
               value={bookId}
               onChange={(e) => setBookId(e.target.value)}
             />
           </div>
+          <span className={`${isValid?'visually-hidden':''}`}>{message}</span>
           <button type="submit" className="btn btn-outline-danger">
             Delete
           </button>
+          
         </form>
         <div
           className={`${isValid ? "" : "visually-hidden"} bookDeatilsToDelete d-flex align-items-center flex-column gap-2 mt-3`}
@@ -142,7 +146,7 @@ function RemoveBook({ isLogin, isAdmin, setIsLogin }) {
           <button onClick={deleteBook} type="button" className="btn btn-outline-danger">
             Confirm Delete
           </button>
-          <p className="bg-danger rounded-2 text-center fs-3 text-white mt-2">{message}</p>
+          <p className="rounded-2 text-center fs-3 text-white mt-2">{message}</p>
         </div>
       </div>
     </div>

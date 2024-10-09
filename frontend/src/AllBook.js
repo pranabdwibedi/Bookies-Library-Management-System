@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Table from "./components/Table";
 import { NavLink } from "react-router-dom";
 import ValidateToken from "./utils/ValidateToken";
 import BookCard from "./components/BookCard";

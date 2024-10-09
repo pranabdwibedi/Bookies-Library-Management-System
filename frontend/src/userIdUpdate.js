@@ -58,7 +58,7 @@ export default function UserIdUpdate({isLogin, setIsLogin, isAdmin, setIsAdmin})
             newUserId : userId
         }
         try{
-            await axios.post('http://localhost:8000/LMS/api/v1/user/updateUserID',data,{
+            await axios.put('http://localhost:8000/LMS/api/v1/user/updateUserID',data,{
                 headers : {
                     "x-access-token" : localStorage.getItem('token')
                 }
@@ -67,14 +67,12 @@ export default function UserIdUpdate({isLogin, setIsLogin, isAdmin, setIsAdmin})
                 localStorage.setItem('token','')
                 setTimeout(()=>{
                     setMessage('')
-                },4000)
+                    window.location.reload();
+                },500)
                 navigate('/login');
             }).catch(err=>{
                 console.log(err)
                 setMessage(err.response.data.message)
-                setTimeout(()=>{
-                    setMessage('')
-                },4000)
             })
         }catch(err){
             console.log(err)
@@ -86,7 +84,7 @@ export default function UserIdUpdate({isLogin, setIsLogin, isAdmin, setIsAdmin})
         <h1><u>User ID update</u></h1>
       <div className='IdUpdateCard'>
       <form
-          className="d-flex flex-wrap gap-2 align-items-center findBookForm flex-column"
+          className="d-flex flex-wrap gap-2 align-items-center flex-column"
           onSubmit={checkAvailability}
         >
           <label htmlFor="userIdInput">
@@ -94,11 +92,12 @@ export default function UserIdUpdate({isLogin, setIsLogin, isAdmin, setIsAdmin})
           </label>
           <div className="d-flex justify-content-center gap-3 align-items-center">
             <input
-              className="form-control w-60 align-self-center"
+              className="form-control w-60 align-self-center inputField text-white bg-transparent"
               id="userIdInput"
               aria-describedby="userIdInput"
               type="text"
               value={userId}
+              placeholder='Enter new User ID'
               onChange={(e) => {
                 setIsAvailable(false) 
                 setUserId(e.target.value)

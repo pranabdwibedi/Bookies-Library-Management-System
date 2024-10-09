@@ -22,7 +22,7 @@ function Categories({isLogin,setIsLogin, categories}) {
     <div className="contentViewport d-flex flex-column pt-5">
       <div>
       <h3 className="m-4">Choose your favorite category : </h3>
-      <div className="d-flex flex-wrap p-5 gap-2 justify-content-between">
+      <div className="d-flex flex-wrap p-5 gap-2 justify-content-around">
         {categories.map((category, index) => {
           return (
             <div

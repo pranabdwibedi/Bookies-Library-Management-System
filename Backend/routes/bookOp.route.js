@@ -9,6 +9,7 @@ import {
     getBookByType,
     getBookByName,
     getAllBookCategories,
+    readAllBookInfoController,
 } from "../controllers/book.controller.js";
 
 //middlewares
@@ -27,12 +28,12 @@ const bookRouter = (app) => {
         [verifyToken, addBookMW],
         addBookController
     );
-    app.post(
+    app.delete(
         "/LMS/api/v1/books/remove",
         [verifyToken, verifyAdmin, deleteBookMW],
         removeBookController
     );
-    app.post(
+    app.put(
         "/LMS/api/v1/books/update",
         [verifyToken, verifyAdmin, updateBookMW],
         updateBookController
@@ -41,6 +42,11 @@ const bookRouter = (app) => {
         "/LMS/api/v1/books/bookInfo",
         [verifyToken, bookInfoMW],
         readBookInfoController
+    );
+    app.get(
+        "/LMS/api/v1/books/all/bookInfo",
+        [verifyToken],
+        readAllBookInfoController
     );
     app.get("/LMS/api/v1/books/categories", [verifyToken], getBookCategories);
     app.get(

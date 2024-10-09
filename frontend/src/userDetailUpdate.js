@@ -33,7 +33,7 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
         mobileNo : mobileNo
     }
     try{
-        await axios.post('http://localhost:8000/LMS/api/v1/user/updateDetails',data,{
+        await axios.put('http://localhost:8000/LMS/api/v1/user/updateDetails',data,{
             headers : {
                 "x-access-token" : localStorage.getItem('token')
             }
@@ -43,8 +43,9 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
             localStorage.setItem('email',response.data.email)
             localStorage.setItem('mobileNo',response.data.mobileNo)
             setTimeout(()=>{
-                setMessage('')
-            },3000)
+              window.location.reload();
+              setMessage('')
+            },500)
         }).catch(err=>{
             setMessage(err.response.data.message)
         })
@@ -54,20 +55,20 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
   }
   return (
     <div className="contentViewport pt-5 d-flex justify-content-center align-items-center">
-      <div className="d-flex updateBookContainer flex-column gap-2 justify-content-center align-items-center">
+      <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
         <h1>
           <u>Update user details</u>
         </h1>
         <form
           onSubmit={updateUserDetails}
-          className='updateBookForm w-100 d-flex flex-wrap justify-content-evenly align-items-center p-2 rounded-2 bg-lightBlue text-white'
+          className='updateUserForm w-100 d-flex flex-wrap justify-content-evenly align-items-center p-2 rounded-2 text-white'
         >
           <div className="mb-3">
             <label htmlFor="userName" className="form-label">
               Your Name :
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="userName"
               aria-describedby="userName"
               type="text"
@@ -80,7 +81,7 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
               Email Address : 
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="userEmail"
               aria-describedby="userEmail"
               type="email"
@@ -93,7 +94,7 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
               Mobile Number :
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="userMobile"
               aria-describedby="userMobile"
               type="number"

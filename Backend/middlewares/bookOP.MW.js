@@ -38,6 +38,11 @@ const addBookMW = async (req, res, next) => {
         message: "Book description is a mendatory field",
       });
     }
+    if(!requestBody.price){
+      return res.status(400).send({
+        message: "Please mention price of the book",
+      });
+    }
     let validationArray = (
       await bookModel.schema.path("bookType").enumValues
     ).map((bookType) => {
@@ -97,21 +102,27 @@ const addBookMW = async (req, res, next) => {
 };
 
 const deleteBookMW = async (req, res, next) => {
-  const requestBody = req.body;
-  if (!requestBody) {
-    return res.status(400).send({
-      message: "The request body is not present",
-    });
-  }
-  if (!requestBody.bookId) {
-    return res.status(400).send({
-      message: "The book Id is menadatory to delete a book",
-    });
-  }
-  const book = await bookModel.findOne({ bookId: requestBody.bookId });
-  if (!book) {
-    return res.status(400).send({
-      message: "The book Id is invalid",
+  const requestBody = req.query;
+  try{
+    if (!requestBody) {
+      return res.status(400).send({
+        message: "The request body is not present",
+      });
+    }
+    if (!requestBody.bookId) {
+      return res.status(400).send({
+        message: "The book Id is menadatory to delete a book",
+      });
+    }
+    const book = await bookModel.findOne({ bookId: requestBody.bookId });
+    if (!book) {
+      return res.status(400).send({
+        message: "The book Id is invalid",
+      });
+    }
+  }catch(err){
+    return res.status(500).send({
+      message: "Internal error occured while validating",
     });
   }
   next();
@@ -137,7 +148,8 @@ const updateBookMW = (req, res, next) => {
     !requestBody.edition &&
     !requestBody.publishYear &&
     !requestBody.totalQty &&
-    !requestBody.availableQty
+    !requestBody.availableQty&&
+    !requestBody.price
   ) {
     return res.status(400).send({
       message: "Please mention fields to update",
@@ -147,24 +159,24 @@ const updateBookMW = (req, res, next) => {
 };
 
 const bookInfoMW = async (req, res, next) => {
-  if (req.query.bookId) {
-    const book = await bookModel.findOne({ bookId: req.query.bookId });
+  try{
+    if(!req.query.bookId){
+      return res.status(400).send({
+        message : "Book Id is a mendatory"
+      })
+    }
+    const book = await bookModel.findOne({ bookId: Number(req.query.bookId) });
     if (!book) {
       return res.status(400).send({
         message: "The book Id is invalid",
       });
     }
+    next();
+  }catch(err){
+    return res.status(500).send({
+      message : "Internal error while validating request"
+    })
   }
-  // if (req.body.bookType) {
-  //   console.log(req.body.bookType);
-  //   const book = await bookModel.findOne({ bookType: req.body.bookType });
-  //   if (!book) {
-  //     return res.status(400).send({
-  //       message: "The book type is invalid",
-  //     });
-    // }
-  // }
-  next();
 };
 
 const bookInfoByTypeMW = async (req, res, next) => {

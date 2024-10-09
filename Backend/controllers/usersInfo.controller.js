@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs'
 import userModel from '../models/user.model.js'
+import User from '../models/user.model.js';
+import Book from '../models/book.model.js';
 const getUserInfo = async(req,res) =>{
     const query = req.query
     try{
@@ -11,9 +13,33 @@ const getUserInfo = async(req,res) =>{
             message : "The user Id is not valid"
            })
     }catch(err){
-        console.log(err)
         return res.status(500).send({
             message : "Internal error while fetching user details"
+        })
+    }
+}
+const getBorrowedBooks = async(req,res) =>{
+    const userId = req.query.userId;
+    let books = [];
+    try{
+        const user = await User.findOne({userId : userId})
+        if(!user){
+            return res.status(404).send({
+                message : "User not found"
+            })
+        }
+        const borrowedBooks = user.borrowedBooks;
+        if(borrowedBooks.length === 0){
+            return res.status(200).send([])
+        }
+        for(let i = 0;i<borrowedBooks.length;i++){
+            let book = await Book.findById(borrowedBooks[i]);
+            books.push(book)
+        }
+        return res.status(200).send(books)
+    }catch(err){
+        return res.status(500).send({
+            message : "Internal error occured"
         })
     }
 }
@@ -77,4 +103,4 @@ const updatUserDetails = async(req,res) =>{
     }
     
 }
-export {getUserInfo,updatePassword,updateUserId,updatUserDetails};
+export {getUserInfo,updatePassword,updateUserId,updatUserDetails,getBorrowedBooks};

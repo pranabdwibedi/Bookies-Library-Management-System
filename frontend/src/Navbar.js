@@ -37,13 +37,6 @@ function Navbar({
       console.log("Error while searching");
     }
   };
-
-  const handleLogout = () => {
-    localStorage.setItem("token", "");
-    setIsLogin(false);
-    setIsAdmin(false);
-    navigate('/login')
-  };
   return (
       <nav className="navbar navbar-expand-lg navigationBar">
         <div className="container-fluid">
@@ -62,11 +55,16 @@ function Navbar({
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse rounded p-2" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to="/">
                 <span>Home</span>
+                </NavLink>
+              </li>
+              <li className={`nav-item ${isLogin ? "" : "visually-hidden"} ${isAdmin?"visually-hidden" : ""}`}>
+                <NavLink className="nav-link" to="books/borrowed">
+                <span>Borrowed Books</span>
                 </NavLink>
               </li>
               <li className={`nav-item ${isLogin ? "" : "visually-hidden"}`}>
@@ -80,10 +78,20 @@ function Navbar({
                 </NavLink>
               </li>
               <li className={`nav-item dropdown ${isLogin && isAdmin ? "" : "visually-hidden"}`}>
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle adminControldropDownBtn" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin Controls
               </a>
               <ul className="dropdown-menu dropMenu" aria-labelledby="navbarDropdown">
+              <li>
+                  <NavLink className="dropdown-item" to="/transaction/borrower/new">
+                    Add a Borrower
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="dropdown-item" to="/transaction/borrower/remove">
+                    Remove a Borrower
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink className="dropdown-item" to="/books/controls/add">
                     Add New Book
@@ -109,13 +117,13 @@ function Navbar({
               role="search"
             >
               <input
-                className="form-control me-2"
+                className="form-control me-2 bg-transparent text-white inputField"
                 type="search"
-                placeholder="Search"
+                placeholder="Search books"
                 aria-label="Search"
                 onChange={(e) => setKeyword(e.target.value)}
               />
-              <button className="btn btn-outline-success" type="submit">
+              <button className="btn btn-success" type="submit">
                 Search
               </button>
             </form>
@@ -138,15 +146,6 @@ function Navbar({
             </div>
 
             <div role="button" className={`userIconContainer ${isLogin?"":"visually-hidden"}`} onClick={()=>{navigate('/user/details')}}>
-                {/* <button
-                  type="button"
-                  className={`btn btn-primary ms-5 ${
-                    isLogin ? "" : "visually-hidden"
-                  }`}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button> */}
                 <img src="/userLogo.png" alt="user profile pic" height={40} className="me-1 d-inline" />
             </div>
           </div>

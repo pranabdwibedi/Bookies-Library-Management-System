@@ -17,6 +17,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
   const [availableQty, setAvailableQty] = useState();
   const [allCategories, setAllCategories] = useState([]);
   const [message, setMessage] = useState("");
+  const [price, setPrice] = useState()
 
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -88,6 +89,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
           setTotalQty(response.data.totalQty);
           setLanguage(response.data.language);
           setAvailableQty(response.data.availableQty);
+          setPrice(response.data.price)
           setTimeout(() => {
             setMessage();
           }, 2000);
@@ -148,10 +150,11 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
       totalQty: totalQty,
       availableQty: availableQty,
       language: language,
+      price : price
     };
     try {
       await axios
-        .post("http://localhost:8000/LMS/api/v1/books/update", newData, {
+        .put("http://localhost:8000/LMS/api/v1/books/update", newData, {
           headers: {
             "x-access-token": localStorage.getItem("token"),
           },
@@ -160,7 +163,8 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
           setMessage(response.data.message);
           setTimeout(() => {
             setMessage();
-          }, 5000);
+            window.location.reload();
+          }, 500);
         })
         .catch((err) => {
           setMessage(err.response.data.message);
@@ -188,11 +192,12 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
           </label>
           <div className="d-flex justify-content-center gap-3 align-items-center">
             <input
-              className="form-control w-60 align-self-center"
+              className="form-control w-60 align-self-center inputField text-white bg-transparent"
               id="bookIdInput"
               aria-describedby="bookIdInput"
               type="number"
               value={bookId}
+              placeholder="Enter book Id"
               onChange={(e) => setBookId(e.target.value)}
             />
 
@@ -206,7 +211,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
         </form>
         <form
           onSubmit={updateBook}
-          className={`updateBookForm d-flex flex-wrap justify-content-evenly align-items-center p-2 rounded-2 bg-lightBlue text-white ${
+          className={`updateBookForm d-flex flex-wrap justify-content-evenly align-items-center p-2 rounded-2 text-white ${
             isValid ? "" : "visually-hidden"
           }`}
         >
@@ -215,7 +220,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Name of the book
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="bookNameField"
               aria-describedby="bookName"
               type="text"
@@ -229,7 +234,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Author(s) of the book
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="bookAuthorsField"
               aria-describedby="bookAuthor"
               type="text"
@@ -242,7 +247,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Edition
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="bookEditionField"
               aria-describedby="bookEdition"
               type="number"
@@ -256,15 +261,15 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Choose book language
             </label>
             <select
-              className="form-select"
+              className="form-select bg-transparent text-white"
               id="BooklanguageField"
               aria-label="book language"
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
             >
-              <option value="ENGLISH">English</option>
-              <option value="HINDI">Hindi</option>
-              <option value="ODIA">Odia</option>
+              <option value="ENGLISH" className="bg-black text-white">English</option>
+              <option value="HINDI" className="bg-black text-white">Hindi</option>
+              <option value="ODIA" className="bg-black text-white">Odia</option>
             </select>
           </div>
           <div className="mb-3">
@@ -272,7 +277,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Publish Year
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="bookPublishYearField"
               aria-describedby="publishYear"
               type="number"
@@ -285,7 +290,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Total Quantity
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="totalBookQty"
               aria-describedby="totalQuantity"
               type="number"
@@ -298,7 +303,7 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               Available Quantity
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
               id="AvailableQuantity"
               aria-describedby="booksAvailable"
               type="number"
@@ -306,12 +311,26 @@ function UpdateBook({ isLogin, isAdmin, setIsLogin }) {
               onChange={(e) => setAvailableQty(e.target.value)}
             />
           </div>
+          <div className="mb-3">
+          <label htmlFor="priceField" className="form-label">
+            Price
+          </label>
+          <input
+            className="form-control  inputField text-white bg-transparent"
+            placeholder="Enter book Price"
+            id="priceField"
+            aria-describedby="book price"
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
           <div className="mb-3 AddDescriptionBox">
             <label htmlFor="description" className="form-label">
               Description of the book :
             </label>
             <textarea
-              class="form-control w-100"
+              class="form-control w-100 inputField text-white bg-transparent" rows={5}
               placeholder="add book description here ..."
               id="description"
               value={bookDesc}

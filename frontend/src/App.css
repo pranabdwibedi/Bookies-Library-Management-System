@@ -11,13 +11,12 @@
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    
 }
 .navigationBar{
     width: 100%;
+    position: fixed;
     background-color: transparent;
     backdrop-filter: blur(10px);
-    position: fixed;
     height: 60px; 
     top: 0;
     z-index: 1000;
@@ -26,8 +25,18 @@
     color: white;
 }
 .dropMenu{
-    background-color: rgb(58, 54, 47);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(107,9,121,1) 100%, rgba(0,212,255,1) 100%);
+    backdrop-filter: blur(1000px);
+    border: 1px solid white;
 }
+.adminControldropDownBtn:hover{
+    color: azure;
+}
+.inputField::placeholder {
+    color: rgb(153, 153, 153);
+    opacity: 1;
+  }
 .contentViewport{
     height: 100vh;
     width: 100vw;
@@ -35,7 +44,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     color: white;
-    background-image: url('D:/Desktop/Library Management System/frontend/public/Ubackground.jpg');
+    background-image: url('D:/Desktop/Library Management System/frontend/public/Ubackground.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,49 +52,76 @@
 }
 .loginForm,.registerForm {
     background-color: transparent;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(50px);
+    border: 1px solid white;
 }
 .homePage{
-    background-image: url("D:/Desktop/Library Management System/frontend/public/homeBg.jpg");
+    /* background-image: url("D:/Desktop/Library Management System/frontend/public/homeBg.jpg"); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+.homeGreetCard{
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    color: white;
+}
 .userInfoPanel{
     padding-top: 6rem;
     padding-bottom: 20px;
+
 }
 .registerForm{
     width: 35%;
+}
+.addBorrowerForm{
+    width: fit-content;
+    padding: 10px;
+    height: max-content;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    border: 1px solid white;
 }
 .addBookForm{
     width: 50%;
     padding: 10px;
     height: max-content;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
 }
 .updateBookForm{
     width : 50%;
     height: max-content;
     overflow-x: hidden;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
 }
 .findBookForm{
-    background-color: #101d29;
     color: white;
     padding: 30px;
     border-radius: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
 }
 .deleteBookForm{
-    background-color: #101d29;
     color: white;
     padding: 30px;
     border-radius: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
 }
 .bookDeatilsToDelete{
     width: 50%;
-    background-color: #101d29;
     color: white;
     padding: 30px;
     border-radius: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
 }
 .bookDeatilsToDelete td{
     padding: 10px;
@@ -98,7 +134,9 @@
     width: 200px;
     height: 200px;
     color : white;
-    background-color: rgb(20, 80, 80);
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    border: 1px solid rgb(105, 77, 77);
 }
 .categoriesBox:hover{
     cursor: pointer;
@@ -106,8 +144,10 @@
 }
 .cards{
     width: 300px;
-    height: 550px;
-    background-color: #101d29;
+    height: 600px;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    border: 1px solid rgb(46, 128, 100);
     color: white;
 }
 .BookHeader p{
@@ -129,25 +169,36 @@
     width: max-content;
 }
 .UserDetailsTable{
-    background-color: #2a333b;
     color: white;
     padding: 20px;
     border-radius: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
 }
 .UserDetailsTable td{
     padding: 20px;
 }
+.updateUserForm{
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: 1px solid white;
+}
 .IdUpdateCard{
-    background-color: #101d29;
     color: white;
     padding: 30px;
     border-radius: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    border: 1px solid white;
 }
 .updatePWForm{
-    background-color: #101d29;
     color: white;
     padding: 30px;
     border-radius: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    border: 1px solid white;
 }
 @media only screen and (max-width : 1300px){
     .registerForm{

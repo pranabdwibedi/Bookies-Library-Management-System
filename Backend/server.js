@@ -8,6 +8,7 @@ import bcrypt from 'bcryptjs'
 import bookRouter from './routes/bookOp.route.js'
 import cors from 'cors'
 import userRouter from './routes/userOp.route.js'
+import transactionRoutes from './routes/transaction.route.js'
 
 const app = express()
 app.use(express.json())
@@ -15,6 +16,7 @@ app.use(cors());
 authRouter(app)
 bookRouter(app)
 userRouter(app)
+transactionRoutes(app)
 
 app.use(cors({
     origin: 'http://localhost:3000' // Allow only your React app to access the API

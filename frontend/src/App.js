@@ -19,7 +19,9 @@ import UserInfoPanel from "./userInfoPanel";
 import UserDetailUpdate from "./userDetailUpdate";
 import UserIdUpdate from "./userIdUpdate";
 import UserPwUpdate from "./userPwUpdate";
-
+import AddBorrower from "./controls/addBorrower";
+import RemoveBorrower from "./controls/removeBorrower";
+import BorrowedBooks from "./BorrowedBooks";
 
 function App() {
   const [isLogin, setIsLogin] = useState(ValidateToken());
@@ -28,15 +30,18 @@ function App() {
   );
   const [categories, setCategories] = useState([]);
   const [searchBooks, setSearchBooks] = useState([]);
-  const [keyword,setKeyword] = useState();
+  const [keyword, setKeyword] = useState();
   const [allBooks, setAllBooks] = useState([]);
+  const [borrowedBooks,setBorrowedBooks] = useState([]);
   useEffect(() => {
     fetchAllBooks();
     fetchCategories();
-  }, []);
+    fetchBorrowedBooks();
+  }, [isLogin, isAdmin]);
+  //this function fetches all book details
   const fetchAllBooks = async () => {
     await axios
-      .get("http://localhost:8000/LMS/api/v1/books/bookInfo", {
+      .get("http://localhost:8000/LMS/api/v1/books/all/bookInfo", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -67,9 +72,24 @@ function App() {
         console.log(err.response.data.message);
       });
   };
+  const fetchBorrowedBooks = async() =>{
+    await axios.get(
+      `http://localhost:8000/LMS/api/v1/user/books/borrowed?userId=${localStorage.getItem(
+        "userId"
+      )}`,{
+          headers : {
+              "x-access-token" : localStorage.getItem('token')
+          }
+      }
+    ).then((response)=>{
+      console.log(response.data)
+        setBorrowedBooks(response.data);
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
   return (
     <div className="FullViewPort">
-      
       <BrowserRouter>
         <Navbar
           isLogin={isLogin}
@@ -78,15 +98,42 @@ function App() {
           setIsAdmin={setIsAdmin}
           setSearchBooks={setSearchBooks}
           keyword={keyword}
-          setKeyword = {setKeyword}
+          setKeyword={setKeyword}
         />
         <Routes>
-          <Route path="/user/details/update" element={<UserDetailUpdate isLogin={isLogin} isAdmin={isAdmin} setIsLogin={setIsLogin} setIsAdmin={setIsAdmin}/>}></Route>
           <Route
-          path="/user/details/userIdUpdate"
-          element={<UserIdUpdate isLogin={isLogin} setIsLogin={setIsLogin} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>}
+            path="/user/details/update"
+            element={
+              <UserDetailUpdate
+                isLogin={isLogin}
+                isAdmin={isAdmin}
+                setIsLogin={setIsLogin}
+                setIsAdmin={setIsAdmin}
+              />
+            }
           ></Route>
-          <Route path='/user/details/userPWUpdate' element={<UserPwUpdate isLogin={isLogin} setIsLogin={setIsLogin} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>}></Route>
+          <Route
+            path="/user/details/userIdUpdate"
+            element={
+              <UserIdUpdate
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+              />
+            }
+          ></Route>
+          <Route
+            path="/user/details/userPWUpdate"
+            element={
+              <UserPwUpdate
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+              />
+            }
+          ></Route>
           <Route
             path="/"
             element={
@@ -95,6 +142,18 @@ function App() {
                 setIsLogin={setIsLogin}
                 isAdmin={isAdmin}
                 setIsAdmin={setIsAdmin}
+              />
+            }
+          ></Route>
+          <Route
+            path="/books/borrowed"
+            element={
+              <BorrowedBooks
+                isLogin={isLogin}
+                isAdmin={isAdmin}
+                setIsLogin={setIsLogin}
+                setIsAdmin={setIsAdmin}
+                borrowedBooks={borrowedBooks}
               />
             }
           ></Route>
@@ -121,16 +180,59 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/user/details" element={<UserInfoPanel isLogin={isLogin} setIsLogin={setIsLogin} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>}></Route>
+          <Route
+            path="/user/details"
+            element={
+              <UserInfoPanel
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+              />
+            }
+          ></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route
             path="/books/categories"
-            element={<Categories isLogin={isLogin} setIsLogin={setIsLogin} categories={categories}/>}
+            element={
+              <Categories
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+                categories={categories}
+              />
+            }
           ></Route>
           <Route
             path="/searchResult"
             element={
-              <SearchResult heading={`Search Result for "${keyword}" :`} array={searchBooks} isAdmin={isAdmin} setIsAdmin={setIsAdmin} isLogin={isLogin} setIsLogin={setIsLogin}/>
+              <SearchResult
+              keyword={keyword}
+                array={searchBooks}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+              />
+            }
+          ></Route>
+          <Route
+            path="/transaction/borrower/new"
+            element={
+              <AddBorrower
+                isLogin={isLogin}
+                isAdmin={isAdmin}
+                setIsLogin={setIsLogin}
+              />
+            }
+          ></Route>
+          <Route
+            path="/transaction/borrower/remove"
+            element={
+              <RemoveBorrower
+                isLogin={isLogin}
+                isAdmin={isAdmin}
+                setIsLogin={setIsLogin}
+              />
             }
           ></Route>
           <Route
@@ -177,19 +279,28 @@ function App() {
                     isAdmin={isAdmin}
                     setIsAdmin={setIsAdmin}
                     setIsLogin={setIsLogin}
-                    allBooks = {allBooks}
+                    allBooks={allBooks}
                   />
                 }
               ></Route>
             );
           })}
-          {
-            allBooks.map((book)=>{
-              return (
-                <Route path={`/books/book/${book.name}`} element={<GetAllBooks book={book} isLogin={isLogin} isAdmin={isAdmin} setIsLogin={setIsLogin} setIsAdmin={setIsAdmin}/>}></Route>
-              );
-            })
-          }
+          {allBooks.map((book) => {
+            return (
+              <Route
+                path={`/books/book/${book.name}`}
+                element={
+                  <GetAllBooks
+                    book={book}
+                    isLogin={isLogin}
+                    isAdmin={isAdmin}
+                    setIsLogin={setIsLogin}
+                    setIsAdmin={setIsAdmin}
+                  />
+                }
+              ></Route>
+            );
+          })}
         </Routes>
       </BrowserRouter>
     </div>
