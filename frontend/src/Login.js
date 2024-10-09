@@ -47,6 +47,10 @@ const Login = ({ isLogin, setIsLogin, isAdmin, setIsAdmin }) => {
 
   return (
     <div className="contentViewport d-flex justify-content-center align-items-center loginPage">
+      <div>
+      <h1 className="mx-auto text-center">
+          User Login
+        </h1>
       <div className="loginForm p-5 rounded text-light">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -54,7 +58,8 @@ const Login = ({ isLogin, setIsLogin, isAdmin, setIsAdmin }) => {
               User ID
             </label>
             <input
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
+              placeholder="Enter your user ID"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               type="text"
@@ -68,7 +73,8 @@ const Login = ({ isLogin, setIsLogin, isAdmin, setIsAdmin }) => {
             </label>
             <input
               type="password"
-              className="form-control"
+              className="form-control inputField text-white bg-transparent"
+              placeholder="Enter your password"
               id="exampleInputPassword1"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -83,6 +89,7 @@ const Login = ({ isLogin, setIsLogin, isAdmin, setIsAdmin }) => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

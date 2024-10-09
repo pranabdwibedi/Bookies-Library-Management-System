@@ -117,7 +117,7 @@ export default function UserPwUpdate() {
             />
           </div>
           <span className="text-danger"><b>{updateMessage}</b></span>
-          <button type="submit" className="btn btn-outline-primary">Authenticate</button>
+          <button type="submit" className="btn btn-outline-primary">Change Password</button>
         </form>
         </div>
       </div>

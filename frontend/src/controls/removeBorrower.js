@@ -81,7 +81,7 @@ function RemoveBorrower({ isLogin, isAdmin, setIsLogin }) {
 
   return (
     <div className="contentViewport pt-5">
-      <div className="d-flex updateBookContainer flex-column gap-2 justify-content-center align-items-center">
+      <div className="d-flex updateBookContainer h-100 flex-column gap-2 justify-content-center align-items-center">
         <div className="d-flex flex-column gap-2 justify-content-center align-items-center pt-4 w-100">
           <h1>
             <u>Return Book</u>

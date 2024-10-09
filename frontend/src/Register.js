@@ -1,17 +1,26 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Register() {
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [mobNo, setMobNo] = useState();
   const [password, setPassword] = useState("");
+  const [password1,setPassword1] = useState('');
   const [isAdmin, SetIsAdmin] = useState(false);
   const [adminSecret, setAdminSecret] = useState("")
   const [message, setMessage] = useState("")
+  const navigate = useNavigate()
   const handleSubmit = async (event) => {
     event.preventDefault()
-
+    if(password !== password1){
+      setMessage("The password didn't match")
+      setTimeout(()=>{
+          setMessage('')
+      },3000)
+      return;
+  }
     let data = {
         name : name,
         userId : userId,
@@ -25,11 +34,20 @@ function Register() {
     }
 
     try{
-        const response = await axios.post('http://localhost:8000/LMS/api/v1/users/signup',data);
-        setMessage(response.data.message)
+        await axios.post('http://localhost:8000/LMS/api/v1/users/signup',data).then(response=>{
+          setMessage(response.data.message)
+          setTimeout(()=>{
+            navigate('/login')
+          },500)
+        }).catch(err=>{
+          setMessage(err.response.data.message)
+          setTimeout(()=>{
+            setMessage('')
+          },3000)
+        })
+        
     }catch(err){
         console.log(err)
-        setMessage(err.response.data.message)
     }
   };
   const handleAdminCheck = () => {
@@ -40,18 +58,23 @@ function Register() {
     }
   };
   return (
-    <div className="contentViewport d-flex registerPage">
-      <form onSubmit={handleSubmit} className="registerForm m-auto text-light d-flex flex-wrap flex-column rounded-4 p-4">
+    <div className="contentViewport pt-5">
+      <div className="d-flex registerPage flex-column justify-content-center align-items-center mt-5">
+      <h1>
+        <u>Register User</u>
+      </h1>
+      <form onSubmit={handleSubmit} className="registerForm text-light d-flex flex-wrap flex-column rounded-4 p-4 w-50">
         <div className="d-flex flex-wrap gap-3 justify-content-center">
         <div className="mb-3">
           <label htmlFor="fullName" className="form-label">
             Full Name
           </label>
           <input
-            className="form-control"
+            className="form-control inputField text-white bg-transparent"
             id="fullName"
             aria-describedby="userName"
             type="text"
+            placeholder="Enter your full name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -61,10 +84,11 @@ function Register() {
             User ID
           </label>
           <input
-            className="form-control"
+            className="form-control inputField text-white bg-transparent"
             id="userId"
             aria-describedby="userId"
             type="text"
+            placeholder="Enter user ID"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
           />
@@ -74,10 +98,11 @@ function Register() {
             Email ID
           </label>
           <input
-            className="form-control"
+            className="form-control inputField text-white bg-transparent"
             id="emailId"
             aria-describedby="email"
             type="email"
+            placeholder="Enter your email ID"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -87,9 +112,10 @@ function Register() {
             Mobile No
           </label>
           <input
-            className="form-control"
+            className="form-control inputField text-white bg-transparent"
             id="mobileNo" 
             aria-describedby="emailHelp"
+            placeholder="Enter your number"
             type="number"
             value={mobNo}
             onChange={(e) => setMobNo(e.target.value)}
@@ -101,17 +127,31 @@ function Register() {
           </label>
           <input
             type="password"
-            className="form-control"
+            className="form-control inputField text-white bg-transparent"
             id="password"
+            placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <div className="mb-3">
+          <label htmlFor="password1" className="form-label">
+            Reenter Password
+          </label>
+          <input
+            type="password"
+            className="form-control inputField text-white bg-transparent"
+            id="password1"
+            placeholder="Enter password"
+            value={password1}
+            onChange={(e) => setPassword1(e.target.value)}
+          />
         </div>
-        <div className="mb-3 form-check">
+        </div>
+        <div className="mb-3 form-check mx-auto">
           <input
             type="checkbox"
-            className="form-check-input"
+            className="form-check-input bg-transparent"
             id="AdminCheck"
             onClick={handleAdminCheck}
           />
@@ -119,29 +159,29 @@ function Register() {
             ADMIN
           </label>
         </div>
-        <div className={`mb-3 ${isAdmin?"":"visually-hidden"}`}>
+        <div className={`mb-3 w-75 mx-auto ${isAdmin?"":"visually-hidden"}`}>
           <label htmlFor="exampleInputPassword1" className="form-label">
             Secret Code
           </label>
           <input
             type="text"
-            className="form-control"
+            className="form-control inputField text-white bg-transparent"
             id="exampleInputPassword1"
+            placeholder="Enter admin secret code"
             value={adminSecret}
             onChange={(e) => setAdminSecret(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 text-center">
           <p>
             {message}
           </p>
         </div>
-        <div className="d-flex w-100 h-100 justify-content-center align-items-center">
           <button type="submit" className="btn btn-success mx-auto">
             Register
           </button>
-        </div>
       </form>
+      </div>
       </div>
   );
 }
