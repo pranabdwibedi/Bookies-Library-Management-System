@@ -1,4 +1,4 @@
-import express, { json } from 'express'
+import express from 'express'
 import mongoose from 'mongoose'
 import dbConfig from './configs/db.config.js'
 import serverConfig from './configs/server.config.js'
