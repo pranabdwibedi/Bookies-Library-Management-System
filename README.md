@@ -9,14 +9,15 @@ A full-stack MERN project that manages books in a library, providing two types o
   - Update existing books
   - Remove books
   - Manage borrowers (Issue and return books)
-  - **View all borrowers**
+  - Rent calculation based on borrowing duration
+  - View all borrowers
 
 - **Customer:**
   - View the list of books
   - Check if books are available
   - Borrow books
   - Return borrowed books
-  - View borrowed books with rent calculation based on borrowing duration
+  - View borrowed books 
 
 ## Technology Stack
 
@@ -52,11 +53,11 @@ A full-stack MERN project that manages books in a library, providing two types o
 
 ### Book Management (Admin only)
 - **Add Book:** `POST /LMS/api/v1/books/add`
-- **Update Book:** `POST /LMS/api/v1/books/update`
-- **Remove Book:** `POST /LMS/api/v1/books/remove`
-- **Issue Book (Borrow):** `POST /LMS/api/v1/books/borrow`
-- **Return Book:** `POST /LMS/api/v1/books/return`
-- **View All Borrowers:** `GET /LMS/api/v1/borrowers`
+- **Update Book:** `PUT /LMS/api/v1/books/update`
+- **Remove Book:** `DELETE /LMS/api/v1/books/remove`
+- **Issue Book (Borrow):** `POST /LMS/api/v1/transaction/new`
+- **Return Book:** `DELETE /LMS/api/v1/transaction/remove`
+- **View All Borrowers:** `GET /LMS/api/v1/transaction/all`
 
 ### Book Viewing and Borrowing (Customer)
 - **View Books:** Customers can see available books via the frontend interface.
