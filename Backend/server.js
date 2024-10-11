@@ -19,7 +19,7 @@ userRouter(app)
 transactionRoutes(app)
 
 app.use(cors({
-    origin: 'http://localhost:3000' // Allow only your React app to access the API
+    origin: `http://localhost:${serverConfig.FRONTENDPORT}` // Allow only your React app to access the API
   }));
 
 

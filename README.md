@@ -66,12 +66,15 @@ A full-stack MERN project that manages books in a library, providing two types o
 - **View Borrowed Books:** Customers can view their borrowed books along with rent details.
 
 ## Setup and Installation
-
-### Backend
-1. Clone the repository and navigate to the backend folder:
+Clone the repository and navigate to the backend folder:
    ```bash
    git clone https://github.com/pranabdwibedi/Library-Management-System.git
    cd Library-Management-System/backend
+   ```
+### Backend
+1. Navigate to the frontend folder:
+   ```bash
+   cd backend
    ```
 2. Install dependencies:
    ```bash
@@ -99,7 +102,7 @@ A full-stack MERN project that manages books in a library, providing two types o
 ### Frontend
 1. Navigate to the frontend folder:
    ```bash
-   cd ../frontend
+   cd frontend
    ```
 2. Install dependencies:
    ```bash
