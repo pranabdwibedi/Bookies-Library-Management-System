@@ -28,6 +28,8 @@ function GetAllBooks({book,isLogin,isAdmin,setIsLogin,setIsAdmin}) {
               <p>by <b>{book.author}</b> (Author)</p>
               <p>Category : <b>{book.bookType}</b></p>
               <p>Language : <b>{book.language}</b></p>
+              <p className={`${isAdmin?"":"visually-hidden"}`}>Available Quantity : {book.availableQty}</p>
+              <p className={`${isAdmin? "" : "visually-hidden"}`}>Total Quantity : {book.totalQty}</p>
               <p>Edition : <b>{book.edition}</b></p>
               <p>
                   

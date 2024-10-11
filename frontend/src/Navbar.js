@@ -83,6 +83,11 @@ function Navbar({
               </a>
               <ul className="dropdown-menu dropMenu" aria-labelledby="navbarDropdown">
               <li>
+                  <NavLink className="dropdown-item" to="/transaction/borrowers/all">
+                    All Borrowers
+                  </NavLink>
+                </li>
+              <li>
                   <NavLink className="dropdown-item" to="/transaction/borrower/new">
                     Add a Borrower
                   </NavLink>

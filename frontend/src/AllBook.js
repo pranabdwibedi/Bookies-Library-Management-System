@@ -1,5 +1,3 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import ValidateToken from "./utils/ValidateToken";
 import BookCard from "./components/BookCard";
@@ -21,7 +19,6 @@ export default function AllBook({ isLogin, setIsLogin, isAdmin, setIsAdmin, book
   }
   return (
   <div className="contentViewport pt-5">
-    {/* <Table heading={"All Books :"} books={allBooks} />; */}
     <BookCard heading={"All Books : "} books={books} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
   </div>
   )

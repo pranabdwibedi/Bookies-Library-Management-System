@@ -22,6 +22,7 @@ import UserPwUpdate from "./userPwUpdate";
 import AddBorrower from "./controls/addBorrower";
 import RemoveBorrower from "./controls/removeBorrower";
 import BorrowedBooks from "./BorrowedBooks";
+import AllBorrowers from "./controls/AllBorrowers";
 
 function App() {
   const [isLogin, setIsLogin] = useState(ValidateToken());
@@ -32,7 +33,7 @@ function App() {
   const [searchBooks, setSearchBooks] = useState([]);
   const [keyword, setKeyword] = useState();
   const [allBooks, setAllBooks] = useState([]);
-  const [borrowedBooks,setBorrowedBooks] = useState([]);
+  const [borrowedBooks, setBorrowedBooks] = useState([]);
   useEffect(() => {
     fetchAllBooks();
     fetchCategories();
@@ -72,22 +73,26 @@ function App() {
         console.log(err.response.data.message);
       });
   };
-  const fetchBorrowedBooks = async() =>{
-    await axios.get(
-      `http://localhost:8000/LMS/api/v1/user/books/borrowed?userId=${localStorage.getItem(
-        "userId"
-      )}`,{
-          headers : {
-              "x-access-token" : localStorage.getItem('token')
-          }
-      }
-    ).then((response)=>{
-      console.log(response.data)
+  const fetchBorrowedBooks = async () => {
+    await axios
+      .get(
+        `http://localhost:8000/LMS/api/v1/user/books/borrowed?userId=${localStorage.getItem(
+          "userId"
+        )}`,
+        {
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
         setBorrowedBooks(response.data);
-    }).catch(err=>{
-        console.log(err)
-    })
-  }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="FullViewPort">
       <BrowserRouter>
@@ -206,11 +211,21 @@ function App() {
             path="/searchResult"
             element={
               <SearchResult
-              keyword={keyword}
+                keyword={keyword}
                 array={searchBooks}
                 isAdmin={isAdmin}
                 setIsAdmin={setIsAdmin}
                 isLogin={isLogin}
+                setIsLogin={setIsLogin}
+              />
+            }
+          ></Route>
+          <Route
+            path="/transaction/borrowers/all"
+            element={
+              <AllBorrowers
+                isLogin={isLogin}
+                isAdmin={isAdmin}
                 setIsLogin={setIsLogin}
               />
             }

@@ -50,6 +50,36 @@ const addTransactionController = async(req,res) =>{
         })
     }
 }
+const getAllorrowersController = async(req,res)=>{
+    try{
+        let allTransactions = await Transaction.find()
+        let transactionArray = [];
+        let data = {};
+        for(let i = 0;i < allTransactions.length;i++){
+            let book = await Book.findById(allTransactions[i].book);
+            let user = await User.findById(allTransactions[i].user);
+            if(user && book){
+                data = {
+                    userName : user.name,
+                    userId : user.userId,
+                    email : user.email,
+                    mobileNo : user.mobileNo,
+                    bookName : book.name,
+                    bookId : book.bookId,
+                    availableQty : book.availableQty,
+                    borrowDate : allTransactions[i].borrowedDate
+                }
+                transactionArray.push(data)
+            }
+        }
+        return res.status(200).send(transactionArray)
+    }catch(err){
+        console.log(err)
+        return res.status(500).send({
+            message : "Internal error occured while fetching borrowers details"
+        })
+    }
+}
 const getTransactionInfo = async(req,res) => {
     const userId = req.query.userId
     const bookId = req.query.bookId
@@ -139,4 +169,4 @@ const deleteTransactionController = async(req,res) =>{
         })
     }
 }
-export {addTransactionController,deleteTransactionController, getTransactionInfo};
+export {addTransactionController,deleteTransactionController, getTransactionInfo,getAllorrowersController};

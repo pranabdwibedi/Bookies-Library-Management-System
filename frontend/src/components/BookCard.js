@@ -30,6 +30,7 @@ function BookCard({ books, heading, isAdmin }) {
                 </span>
                 <span>Published Year : {book.publishYear}</span>
                 <span>Language : {book.language}</span>
+                <span className={`${isAdmin?"":"visually-hidden"}`}>Available Quantity : <b>{book.availableQty}</b>/<b>{book.totalQty}</b></span>
                 <span>
                   <b>
                     Available :{" "}
