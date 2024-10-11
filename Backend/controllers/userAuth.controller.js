@@ -8,7 +8,7 @@ const userRegController = async (req,res)=>{
     const userToRegister = {
         name : requestBody.name,
         userId : requestBody.userId,
-        password : bcrypt.hashSync(requestBody.password,8),
+        password : bcrypt.hashSync(requestBody.password,authConfig.SALT),
         email : requestBody.email,
         mobileNo : requestBody.mobileNo
     }

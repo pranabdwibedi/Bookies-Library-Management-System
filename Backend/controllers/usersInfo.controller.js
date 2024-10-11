@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import userModel from '../models/user.model.js'
 import User from '../models/user.model.js';
 import Book from '../models/book.model.js';
+import authConfig from '../configs/auth.config.js';
 const getUserInfo = async(req,res) =>{
     const query = req.query
     try{
@@ -53,7 +54,7 @@ const updatePassword = async(req,res) =>{
         })
     }
     try{
-        const newPassword = bcrypt.hashSync(requestBody.newPassword,8)
+        const newPassword = bcrypt.hashSync(requestBody.newPassword,authConfig.SALT)
         await userModel.updateOne({userId : requestBody.userId},{password : newPassword})
         return res.status(200).send({
             message : "Password updated"

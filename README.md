@@ -85,6 +85,7 @@ Clone the repository and navigate to the backend folder:
      ```js
      SECRET = <Your secret for jwt token>
      ADMIN_SECRET = <Secret code for admin creation>
+     SALT = <Your SALT for password encryption>
      ```
    - In `db.config.js`:
      ```js
