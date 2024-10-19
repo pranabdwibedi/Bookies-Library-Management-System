@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "Bookies-backend",
   "version": "1.0.0",
   "description": "This is the backend of a Library Management System",
   "main": "server.js",

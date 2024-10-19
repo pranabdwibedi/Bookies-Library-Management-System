@@ -1,4 +1,4 @@
-# Library Management System
+# Bookies-Library Management System
 
 A full-stack MERN project that manages books in a library, providing two types of users: Admin and Customer. Admins can add, update, and remove books, while customers can view the available books and borrow them.
 
