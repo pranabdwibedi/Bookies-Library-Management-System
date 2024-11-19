@@ -89,12 +89,12 @@ function Navbar({
                 </li>
               <li>
                   <NavLink className="dropdown-item" to="/transaction/borrower/new">
-                    Add a Borrower
+                    Issue Book
                   </NavLink>
                 </li>
                 <li>
                   <NavLink className="dropdown-item" to="/transaction/borrower/remove">
-                    Remove a Borrower
+                    Return Book
                   </NavLink>
                 </li>
                 <li>

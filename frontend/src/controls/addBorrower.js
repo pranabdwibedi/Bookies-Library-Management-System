@@ -69,7 +69,7 @@ function AddBorrower({ isLogin, isAdmin, setIsLogin }) {
       <div className="d-flex updateBookContainer flex-column gap-2 justify-content-center align-items-center h-100">
         <div className="d-flex flex-column gap-2 justify-content-center align-items-center pt-4">
           <h1>
-            <u>Add a Borrower</u>
+            <u>Issue Book</u>
           </h1>
           <form
             onSubmit={addBorrowerOperation}

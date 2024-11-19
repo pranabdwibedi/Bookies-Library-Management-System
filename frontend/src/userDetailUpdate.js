@@ -105,7 +105,7 @@ export default function UserDetailUpdate({ isLogin, isAdmin, setIsAdmin, setIsLo
           <div className="mb-3 w-100 d-flex flex-column">
             <p className="fs-5 mx-auto">{message}</p>
             <button type="submit" className="btn btn-success mx-auto">
-              Update Book Details
+              Update Your Details
             </button>
             </div>
         </form>
